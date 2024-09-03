@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import {  useState } from 'react';
 import { ROUTING } from './routing';
 import { AppLink } from './shared/components/app-link';
+import { articleStorage } from './ArticleStorage';
 
 type ArticlePreviewProps = {
   name: string;
@@ -10,16 +11,17 @@ type ArticlePreviewProps = {
 };
 
 export default function ArticlePreview({ name, header }: ArticlePreviewProps) {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(articleStorage.liked(name));
 
-  const handleClick = () => {
+  const like = () => {
+    articleStorage.like(name);
     setLiked(true);
   };
 
   return (
     <>
       <AppLink href={ROUTING.article(name)}>{header}</AppLink>
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={like}>
         {liked ? '👍' : 'like'}
       </button>
     </>
