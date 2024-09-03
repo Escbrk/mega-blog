@@ -1,6 +1,16 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+import { getAllArticles } from './(server)/api';
 
-export default function Home() {
-  return <main className={styles.main}>Hello World</main>;
+export default async function Home() {
+  const allArticles = await getAllArticles();
+
+  return (
+    <>
+      <h1>Mega-Blog</h1>
+      <ul>
+        {allArticles.map((article) => (
+          <li key={article.name}>{article.header}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
