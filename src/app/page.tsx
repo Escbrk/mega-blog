@@ -1,6 +1,7 @@
 import { getAllArticles } from './(server)/api';
 import { AppLink } from './shared/components/app-link';
 import ArticlePreview from './articlePreview';
+import { HomePage } from './ClientApp';
 const ARTICLES_PER_PAGE = 10;
 
 export default async function Home({
@@ -33,6 +34,7 @@ export default async function Home({
           </li>
         ))}
       </ul>
+      <HomePage/>
 
       {page > 1 ? <AppLink href={previousPageUrl}>Back</AppLink> : null}
       <br />
